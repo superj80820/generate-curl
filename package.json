@@ -1,0 +1,22 @@
+{
+  "name": "curl-printer",
+  "version": "1.0.0",
+  "description": "可以解析express的req物件，並且轉換成CURL來debug",
+  "main": "curl.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/superj80820/curl-printer.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/superj80820/curl-printer/issues"
+  },
+  "homepage": "https://github.com/superj80820/curl-printer#readme",
+  "devDependencies": {
+    "jest": "^25.1.0"
+  }
+}
