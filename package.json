@@ -1,10 +1,11 @@
 {
   "name": "curl-printer",
-  "version": "1.0.0",
+  "version": "0.0.0",
   "description": "可以解析express的req物件，並且轉換成CURL來debug",
-  "main": "curl.js",
+  "main": "main.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "unitTest": "jest ./__tests__",
+    "watchUnitTest": "npm run unitTest -- --watch --coverage"
   },
   "repository": {
     "type": "git",
@@ -18,5 +19,10 @@
   "homepage": "https://github.com/superj80820/curl-printer#readme",
   "devDependencies": {
     "jest": "^25.1.0"
+  },
+  "dependencies": {
+    "crypto-js": "^4.0.0",
+    "jsonpath": "^1.0.2",
+    "lodash": "^4.17.15"
   }
 }
