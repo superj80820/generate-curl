@@ -1,5 +1,6 @@
 const lodash = require('lodash')
 const curlCore = require('./curlCore')
+const utils = require('./utils')
 
 function curl (serializationOption = () => {
   return {}
@@ -48,4 +49,7 @@ function curl (serializationOption = () => {
   }
 }
 
-module.exports = curl
+module.exports = {
+  curl,
+  utils
+}

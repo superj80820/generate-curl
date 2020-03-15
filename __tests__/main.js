@@ -1,7 +1,7 @@
-const utils = require('../utils')
+const { utils: curlUtils } = require('../main')
 
 describe('test handler', () => {
-  const curl = require('../main')()
+  const curl = require('../main').curl()
   test('cover `application/json request` to curl', () => {
     const req = {
       method: 'POST',
@@ -108,7 +108,7 @@ describe('test handler', () => {
     }
     const option = {
       headers: {
-        '$["Content-Type"]': utils.hide(),
+        '$["Content-Type"]': curlUtils.hide(),
       },
       body: {
         '$.a': value => value + 1
@@ -206,7 +206,7 @@ describe('test handler', () => {
 })
 
 describe('test handler with serialization option', () => {
-  const curl = require('../main')(req => {
+  const curl = require('../main').curl(req => {
     return {
       protocol: req.protocol.test,
       query: req.test.query
