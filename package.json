@@ -1,5 +1,5 @@
 {
-  "name": "curl-printer",
+  "name": "generate-curl",
   "version": "0.0.0",
   "description": "可以解析express的req物件，並且轉換成CURL來debug",
   "main": "main.js",
