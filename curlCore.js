@@ -35,10 +35,16 @@ function coverJsonBody (body, option = {}) {
   return JSON.stringify(body)
 }
 
-function coverFormDataBody (body) {
+function coverUrlencodedFormDataBody (body) {
   return Object.entries(body)
     .map(([key, value]) => `${key}=${value}`)
     .join('&')
+}
+
+function coverMultipartFormDataBody (body) {
+  return Object.entries(body)
+    .map(([key, value]) => `-F '${key}=${value}'`)
+    .join(' ')
 }
 
 function getFullURL (req) {
@@ -49,6 +55,7 @@ module.exports = {
   coverHeader,
   coverQuery,
   coverJsonBody,
-  coverFormDataBody,
+  coverUrlencodedFormDataBody,
+  coverMultipartFormDataBody,
   getFullURL
 }

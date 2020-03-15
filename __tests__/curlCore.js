@@ -91,11 +91,18 @@ describe('test cover', () => {
     }
     expect(curlCore.coverJsonBody(body, option)).toBe('[{"a":{"c":"d","e":"fz"},"b":"a"},{"a":{"c":"d","e":"fz"},"b":"a"}]')
   })
-  test('cover json form data body', () => {
+  test('cover json urlencoded form data body', () => {
     const body = {
       'a': 3,
       'b': 'a'
     }
-    expect(curlCore.coverFormDataBody(body)).toBe('a=3&b=a')
+    expect(curlCore.coverUrlencodedFormDataBody(body)).toBe('a=3&b=a')
+  })
+  test('cover json multipart form data body', () => {
+    const body = {
+      'a': '3',
+      'b': 'a'
+    }
+    expect(curlCore.coverMultipartFormDataBody(body)).toBe(`-F 'a=3' -F 'b=a'`)
   })
 })

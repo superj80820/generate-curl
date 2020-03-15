@@ -139,11 +139,37 @@ describe('test handler', () => {
     }
     expect(curl(req)).toBe(`curl -d 'a=3&b=d' -H "Content-Type: application/x-www-form-urlencoded" -H "b: a" -X POST 'http://google.com.tw?a=3&b=4'`)
   })
-  test('cover `not has header request` to curl', () => {
+  test('cover `multipart/form-data request` to curl', () => {
+    const req = {
+      method: 'POST',
+      protocol: 'http',
+      baseUrl: 'google.com.tw',
+      query: {
+        a: "3",
+        b: "4"
+      },
+      headers: {
+        'Content-Type': 'multipart/form-data',
+        'b': 'a'
+      },
+      body: {
+        a: 3,
+        b: 'd'
+      },
+      get() {
+        return ''
+      }
+    }
+    expect(curl(req)).toBe(`curl -F 'a=3' -F 'b=d' -H "Content-Type: multipart/form-data" -H "b: a" -X POST 'http://google.com.tw?a=3&b=4'`)
+  })
+  test('cover `not has content type request` to curl', () => {
     const req = {
       method: 'GET',
       protocol: 'http',
       baseUrl: 'google.com.tw',
+      headers: {
+        a: '3'
+      },
       query: {
         a: "3",
         b: "4"
@@ -152,7 +178,7 @@ describe('test handler', () => {
         return ''
       }
     }
-    expect(curl(req)).toBe(`curl -X GET 'http://google.com.tw?a=3&b=4'`)
+    expect(curl(req)).toBe(`curl -H "a: 3" -X GET 'http://google.com.tw?a=3&b=4'`)
   })
   test('curl parse error', () => {
     const req = {

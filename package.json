@@ -1,7 +1,7 @@
 {
   "name": "generate-curl",
   "version": "0.0.0",
-  "description": "可以解析express的req物件，並且轉換成CURL來debug",
+  "description": "將requests轉換成CURL用以debug的server tool",
   "main": "main.js",
   "scripts": {
     "unitTest": "jest ./__tests__",

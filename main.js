@@ -27,17 +27,17 @@ function curl (serializationOption = () => {
         lodash.isEmpty(req.headers) ||
         (lodash.isEmpty(req.headers['Content-Type']) && lodash.isEmpty(req.headers['content-type']))
       ) {
-        return `curl -X ${req.method} '${curlCore.getFullURL(req)}?${curlCore.coverQuery(req.query)}'`
+        return `curl ${curlCore.coverHeader(req.headers, option.headers)} -X ${req.method} '${curlCore.getFullURL(req)}?${curlCore.coverQuery(req.query)}'`
       }
       const contentType = req.headers['Content-Type'] || req.headers['content-type']
       if (contentType.includes('application/json')) {
         return `curl -d '${curlCore.coverJsonBody(req.body, option.body)}' ${curlCore.coverHeader(req.headers, option.headers)} -X ${req.method} '${curlCore.getFullURL(req)}?${curlCore.coverQuery(req.query)}'`
       }
       else if (contentType.includes('application/x-www-form-urlencoded')) {
-        return `curl -d '${curlCore.coverFormDataBody(req.body, option.body)}' ${curlCore.coverHeader(req.headers, option.headers)} -X ${req.method} '${curlCore.getFullURL(req)}?${curlCore.coverQuery(req.query)}'`
+        return `curl -d '${curlCore.coverUrlencodedFormDataBody(req.body, option.body)}' ${curlCore.coverHeader(req.headers, option.headers)} -X ${req.method} '${curlCore.getFullURL(req)}?${curlCore.coverQuery(req.query)}'`
       }
       else if (contentType.includes('multipart/form-data')) {
-        return `curl -F '${curlCore.coverFormDataBody(req.body, option.body)}' ${curlCore.coverHeader(req.headers, option.headers)} -X ${req.method} '${curlCore.getFullURL(req)}?${curlCore.coverQuery(req.query)}'`
+        return `curl ${curlCore.coverMultipartFormDataBody(req.body, option.body)} ${curlCore.coverHeader(req.headers, option.headers)} -X ${req.method} '${curlCore.getFullURL(req)}?${curlCore.coverQuery(req.query)}'`
       }
       else {
         return "Content type error. Can't not parse"
