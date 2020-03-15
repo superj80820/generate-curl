@@ -6,6 +6,10 @@
   <img src="https://i.imgur.com/6b9qeTc.gif">
 </div>
 
+## 安裝
+
+`npm install generate-curl`
+
 ## 如何使用
 
 ### 對於express.js server
