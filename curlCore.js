@@ -8,27 +8,27 @@ function coverHeader (headers, option = {}) {
       })
   }
   return Object.entries(headers)
-    .map(item => `-H "${item[0]}: ${item[1]}"`)
+    .map(([key, value]) => `-H "${key}: ${value}"`)
     .join(' ')
 }
 
 function coverQuery (query, option = {}) {
   if (Object.keys(option).length !== 0) {
-    Object.keys(option)
-      .forEach(key => {
-        jp.apply(query, key, option[key])
+    Object.entries(option)
+      .forEach(([key, value]) => {
+        jp.apply(query, key, value)
       })
   }
   return Object.entries(query)
-    .map(item => `${item[0]}=${item[1]}`)
+    .map(([key, value]) => `${key}=${value}`)
     .join('&')
 }
 
 function coverJsonBody (body, option = {}) {
   if (Object.keys(option).length !== 0) {
-    Object.keys(option)
-      .forEach(key => {
-        jp.apply(body, key, option[key])
+    Object.entries(option)
+      .forEach(([key, value]) => {
+        jp.apply(body, key, value)
       })
     
   }
@@ -37,7 +37,7 @@ function coverJsonBody (body, option = {}) {
 
 function coverFormDataBody (body) {
   return Object.entries(body)
-    .map(item => `${item[0]}=${item[1]}`)
+    .map(([key, value]) => `${key}=${value}`)
     .join('&')
 }
 
