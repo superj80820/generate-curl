@@ -1,11 +1,15 @@
-const sha256 = require("crypto-js/SHA256");
+const crypto = require('crypto');
 
 function hide () {
   return () => 'hide'
 }
 
 function hash () {
-  return value => sha256(value).toString()
+  return value => {
+    return crypto.createHash('sha256')
+      .update(value)
+      .digest('hex')
+  }
 }
 
 function slice (start, end) {

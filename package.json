@@ -1,6 +1,6 @@
 {
   "name": "generate-curl",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "將requests轉換成CURL用以debug的server tool",
   "main": "main.js",
   "scripts": {
@@ -21,7 +21,6 @@
     "jest": "^25.1.0"
   },
   "dependencies": {
-    "crypto-js": "^4.0.0",
     "jsonpath": "^1.0.2",
     "lodash": "^4.17.15",
     "minimist": "^1.2.2"
