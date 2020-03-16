@@ -48,7 +48,7 @@ function coverMultipartFormDataBody (body) {
 }
 
 function getFullURL (req) {
-  return `${req.protocol}://${req.get('host')}${req.baseUrl}`
+  return `${req.protocol}://${req.get('host')}${req.path}`
 }
 
 module.exports = {

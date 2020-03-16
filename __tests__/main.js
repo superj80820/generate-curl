@@ -6,7 +6,7 @@ describe('test handler', () => {
     const req = {
       method: 'POST',
       protocol: 'http',
-      baseUrl: 'google.com.tw',
+      path: '/api',
       query: {
         a: "3",
         b: "4"
@@ -19,16 +19,16 @@ describe('test handler', () => {
         a: 3
       },
       get() {
-        return ''
+        return 'google.com.tw'
       }
     }
-    expect(curl(req)).toBe(`curl -d '{"a":3}' -H "Content-Type: application/json" -H "b: a" -X POST 'http://google.com.tw?a=3&b=4'`)
+    expect(curl(req)).toBe(`curl -d '{"a":3}' -H "Content-Type: application/json" -H "b: a" -X POST 'http://google.com.tw/api?a=3&b=4'`)
   })
   test('cover `application/json request` to curl with option, and do not override', () => {
     const originReq = {
       method: 'POST',
       protocol: 'http',
-      baseUrl: 'google.com.tw',
+      path: '/api',
       query: {
         a: "3",
         b: "4"
@@ -41,7 +41,7 @@ describe('test handler', () => {
         a: 3
       },
       get() {
-        return ''
+        return 'google.com.tw'
       }
     }
     const req = {...originReq}
@@ -60,7 +60,7 @@ describe('test handler', () => {
     const req = {
       method: 'POST',
       protocol: 'http',
-      baseUrl: 'google.com.tw',
+      path: '/api',
       query: {
         a: "3",
         b: "4"
@@ -73,7 +73,7 @@ describe('test handler', () => {
         a: 3
       },
       get() {
-        return ''
+        return 'google.com.tw'
       }
     }
     const option = {
@@ -84,13 +84,13 @@ describe('test handler', () => {
         '$.a': value => value + 1
       }
     }
-    expect(curl(req, option)).toBe(`curl -d '{"a":4}' -H "Content-Type: application/jsonz" -H "b: a" -X POST 'http://google.com.tw?a=3&b=4'`)
+    expect(curl(req, option)).toBe(`curl -d '{"a":4}' -H "Content-Type: application/jsonz" -H "b: a" -X POST 'http://google.com.tw/api?a=3&b=4'`)
   })
   test('cover `application/json request` to curl with option, utils function', () => {
     const req = {
       method: 'POST',
       protocol: 'http',
-      baseUrl: 'google.com.tw',
+      path: '/api',
       query: {
         a: "3",
         b: "4"
@@ -103,7 +103,7 @@ describe('test handler', () => {
         a: 3
       },
       get() {
-        return ''
+        return 'google.com.tw'
       }
     }
     const option = {
@@ -114,13 +114,13 @@ describe('test handler', () => {
         '$.a': value => value + 1
       }
     }
-    expect(curl(req, option)).toBe(`curl -d '{"a":4}' -H "Content-Type: hide" -H "b: a" -X POST 'http://google.com.tw?a=3&b=4'`)
+    expect(curl(req, option)).toBe(`curl -d '{"a":4}' -H "Content-Type: hide" -H "b: a" -X POST 'http://google.com.tw/api?a=3&b=4'`)
   })
   test('cover `application/x-www-form-urlencoded request` to curl', () => {
     const req = {
       method: 'POST',
       protocol: 'http',
-      baseUrl: 'google.com.tw',
+      path: '/api',
       query: {
         a: "3",
         b: "4"
@@ -134,16 +134,16 @@ describe('test handler', () => {
         b: 'd'
       },
       get() {
-        return ''
+        return 'google.com.tw'
       }
     }
-    expect(curl(req)).toBe(`curl -d 'a=3&b=d' -H "Content-Type: application/x-www-form-urlencoded" -H "b: a" -X POST 'http://google.com.tw?a=3&b=4'`)
+    expect(curl(req)).toBe(`curl -d 'a=3&b=d' -H "Content-Type: application/x-www-form-urlencoded" -H "b: a" -X POST 'http://google.com.tw/api?a=3&b=4'`)
   })
   test('cover `multipart/form-data request` to curl', () => {
     const req = {
       method: 'POST',
       protocol: 'http',
-      baseUrl: 'google.com.tw',
+      path: '/api',
       query: {
         a: "3",
         b: "4"
@@ -157,16 +157,16 @@ describe('test handler', () => {
         b: 'd'
       },
       get() {
-        return ''
+        return 'google.com.tw'
       }
     }
-    expect(curl(req)).toBe(`curl -F 'a=3' -F 'b=d' -H "Content-Type: multipart/form-data" -H "b: a" -X POST 'http://google.com.tw?a=3&b=4'`)
+    expect(curl(req)).toBe(`curl -F 'a=3' -F 'b=d' -H "Content-Type: multipart/form-data" -H "b: a" -X POST 'http://google.com.tw/api?a=3&b=4'`)
   })
   test('cover `not has content type request` to curl', () => {
     const req = {
       method: 'GET',
       protocol: 'http',
-      baseUrl: 'google.com.tw',
+      path: '/api',
       headers: {
         a: '3'
       },
@@ -175,16 +175,16 @@ describe('test handler', () => {
         b: "4"
       },
       get() {
-        return ''
+        return 'google.com.tw'
       }
     }
-    expect(curl(req)).toBe(`curl -H "a: 3" -X GET 'http://google.com.tw?a=3&b=4'`)
+    expect(curl(req)).toBe(`curl -H "a: 3" -X GET 'http://google.com.tw/api?a=3&b=4'`)
   })
   test('curl parse error', () => {
     const req = {
       method: 'POST',
       protocol: 'http',
-      baseUrl: 'google.com.tw',
+      path: '/api',
       query: {
         a: "3",
         b: "4"
@@ -198,7 +198,7 @@ describe('test handler', () => {
         b: 'd'
       },
       get() {
-        return ''
+        return 'google.com.tw'
       }
     }
     expect(curl(req)).toBe(`Content type error. Can't not parse`)
@@ -218,7 +218,7 @@ describe('test handler with serialization option', () => {
       protocol: {
         test: 'http'
       },
-      baseUrl: 'google.com.tw',
+      path: '/api',
       test: {
         query: {
           a: "3",
@@ -233,10 +233,10 @@ describe('test handler with serialization option', () => {
         a: 3
       },
       get() {
-        return ''
+        return 'google.com.tw'
       }
     }
-    expect(curl(req)).toBe(`curl -d '{"a":3}' -H "Content-Type: application/json" -H "b: a" -X POST 'http://google.com.tw?a=3&b=4'`)
+    expect(curl(req)).toBe(`curl -d '{"a":3}' -H "Content-Type: application/json" -H "b: a" -X POST 'http://google.com.tw/api?a=3&b=4'`)
   })
   test('parse serializationOption error', () => {
     const req = {
@@ -244,7 +244,7 @@ describe('test handler with serialization option', () => {
       protocol: {
         test: 'http'
       },
-      baseUrl: 'google.com.tw',
+      path: '/api',
       query: {
         a: "3",
         b: "4"
@@ -257,7 +257,7 @@ describe('test handler with serialization option', () => {
         a: 3
       },
       get() {
-        return ''
+        return 'google.com.tw'
       }
     }
     expect(curl(req)).toBe(`Parse error: TypeError: Cannot read property 'query' of undefined`)

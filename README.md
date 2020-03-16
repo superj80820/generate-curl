@@ -51,7 +51,7 @@ app.listen(3003, function () {
 ```javascript
 const curl = require('generate-curl').curl(req => {
   protocol: req.protocol,
-  baseUrl: req.baseUrl,
+  path: req.path,
   headers: req.headers,
   method: req.method,
   body: req.body,
@@ -59,30 +59,6 @@ const curl = require('generate-curl').curl(req => {
   get (host) {
     return req.get(host)
   }
-})
-```
-
-比如koa的ctx.path對應到express的req.baseUrl，所以須對應兩者
-
-```javascript
-const Koa = require('koa')
-const bodyParser = require('koa-bodyparser');
-const curl = require('generate-curl').curl(ctx => {
-  return {
-    baseUrl: ctx.path
-  }
-})
-
-const app = new Koa();
-app.use(bodyParser());
-
-app.use( async ( ctx ) => {
-  ctx.body = ctx.request.body
-  console.log(curl(ctx))
-})
-
-app.listen(3000, () => {
-  console.log('request get is starting at port 3000')
 })
 ```
 

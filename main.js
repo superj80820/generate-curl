@@ -8,7 +8,7 @@ function curl (serializationOption = () => {
   const serialization = req => {
     return {
       protocol: req.protocol,
-      baseUrl: req.baseUrl,
+      path: req.path,
       headers: req.headers,
       method: req.method,
       body: req.body,
