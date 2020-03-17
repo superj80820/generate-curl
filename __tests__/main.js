@@ -116,6 +116,67 @@ describe('test handler', () => {
     }
     expect(curl(req, option)).toBe(`curl -d '{"a":4}' -H "Content-Type: hide" -H "b: a" -X POST 'http://google.com.tw/api?a=3&b=4'`)
   })
+  test('cover `application/json request` to curl with option, utils function. Should not have call by sharing side effect', () => {
+    const req = {
+      method: 'POST',
+      protocol: 'http',
+      path: '/api',
+      query: {
+        a: "3",
+        b: "4"
+      },
+      headers: {
+        'Content-Type': 'application/json',
+        'b': 'a'
+      },
+      body: {
+        a: 3
+      },
+      get() {
+        return 'google.com.tw'
+      }
+    }
+    const option = {
+      headers: {
+        '$["Content-Type"]': curlUtils.hide(),
+      },
+      body: {
+        '$.a': value => value + 1
+      }
+    }
+    curl(req, option)
+    expect(req.headers['Content-Type']).toBe('application/json')
+  })
+  test('cover body to curl with option, utils function. Should not have call by nested sharing side effect', () => {
+    const req = {
+      method: 'POST',
+      protocol: 'http',
+      path: '/api',
+      query: {
+        a: "3",
+        b: "4"
+      },
+      headers: {
+        'Content-Type': 'application/json',
+        'b': 'a'
+      },
+      body: {
+        a: {
+          b: 2
+        }
+      },
+      get() {
+        return 'google.com.tw'
+      }
+    }
+    const option = {
+      body: {
+        '$..b': value => value + 1
+      }
+    }
+    curl(req, option)
+    expect(req.body.a.b).toBe(2)
+  })
   test('cover `application/x-www-form-urlencoded request` to curl', () => {
     const req = {
       method: 'POST',

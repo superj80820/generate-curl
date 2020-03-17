@@ -1,6 +1,8 @@
 const jp = require('jsonpath')
+const lodash = require('lodash')
 
-function coverHeader (headers, option = {}) {
+function coverHeader (originHeaders, option = {}) {
+  const headers = lodash.cloneDeep(originHeaders)
   if (Object.keys(option).length !== 0) {
     Object.keys(option)
       .forEach(key => {
@@ -12,7 +14,8 @@ function coverHeader (headers, option = {}) {
     .join(' ')
 }
 
-function coverQuery (query, option = {}) {
+function coverQuery (originQuery, option = {}) {
+  const query = lodash.cloneDeep(originQuery)
   if (Object.keys(option).length !== 0) {
     Object.entries(option)
       .forEach(([key, value]) => {
@@ -24,7 +27,8 @@ function coverQuery (query, option = {}) {
     .join('&')
 }
 
-function coverJsonBody (body, option = {}) {
+function coverJsonBody (originBody, option = {}) {
+  const body = lodash.cloneDeep(originBody)
   if (Object.keys(option).length !== 0) {
     Object.entries(option)
       .forEach(([key, value]) => {
